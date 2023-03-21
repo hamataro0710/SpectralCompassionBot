@@ -1,0 +1,23 @@
+.message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.content {
+  background-color: #e6e6e6;
+  padding: 0.5rem;
+  border-radius: 5px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.user-message .content {
+  background-color: #4b9fea;
+  color: #fff;
+}
