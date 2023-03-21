@@ -1,16 +1,15 @@
 import React from "react";
-import "./App.css";
+// import "./App.css";
 import Chat from "./components/Chat/Chat";
+import { Container } from '@mui/material';
 
 function App() {
   return (
-    <div className="App">
-      <h1>My AI Partner</h1>
+    <Container maxWidth="md">
       <Chat />
-    </div>
+    </Container>
   );
 }
-
 export default App;
 
 

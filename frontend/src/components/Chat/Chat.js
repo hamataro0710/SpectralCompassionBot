@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import "./Chat.css";
+// import "./Chat.css";
 import ChatHistory from "../ChatHistory/ChatHistory";
+import { Box, TextField, Button } from '@mui/material';
 
 function Chat() {
   const [userInput, setUserInput] = useState("");
@@ -54,22 +55,24 @@ function Chat() {
     setUserInput("");
   };
 
+
   return (
-    <div className="Chat">
+    <Box>
       <ChatHistory conversations={conversations} />
-      <form onSubmit={(event) => event.preventDefault()} className="form">
-        <label>
-          Your message:
-          <textarea
-            value={userInput}
-            onChange={handleChange}
-            onKeyPress={handleChange}
-            rows={4}
-          />
-        </label>
-        <button onClick={handleSubmit}>Send</button>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="Your message"
+          multiline
+          rows={4}
+          value={userInput}
+          onChange={handleChange}
+          fullWidth
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Send
+        </Button>
       </form>
-    </div>
+    </Box>
   );
 }
 
