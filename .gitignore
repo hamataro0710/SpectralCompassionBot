@@ -13,6 +13,7 @@ frontend/coverage
 
 # misc
 .DS_Store
+.idea
 frontend/.env.local
 frontend/.env.development.local
 frontend/.env.test.local

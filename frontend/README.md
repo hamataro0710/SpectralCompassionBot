@@ -1,4 +1,20 @@
-コンポーネントの説明：
+### ディレクトリ構成
+```
+src/
+  ├── components/
+  │   ├── Chat/
+  │   │   ├── Chat.js
+  │   │   └── Chat.css
+  │   ├── ChatHistory/
+  │   │   ├── ChatHistory.js
+  │   │   └── ChatHistory.css
+  │   └── Message/
+  │       ├── Message.js
+  │       └── Message.css
+  ├── App.js
+  └── App.css
+```
+### コンポーネントの説明：
 
 Chat コンポーネント: ユーザーの入力とAIの応答を処理し、会話履歴を管理します。App.js の現在のコンテンツを Chat.js に移動し、適切なCSSスタイルを Chat.css に追加します。
 
