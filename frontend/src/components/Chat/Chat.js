@@ -1,31 +1,28 @@
 import React, { useState } from "react";
-// import "./Chat.css";
 import ChatHistory from "../ChatHistory/ChatHistory";
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, IconButton } from "@mui/material";
+import { Send as SendIcon } from "@mui/icons-material";
 
 function Chat() {
   const [userInput, setUserInput] = useState("");
   const [conversations, setConversations] = useState([]);
-  const [aiOutput, setAiOutput] = useState('');
-  const [image, setImage] = useState(null);
-  const [generatedImagePath, setGeneratedImagePath] = useState(null);
 
   const handleChange = (event) => {
-    if (event.shiftKey && event.key === "Enter") {
-        setUserInput(userInput + "\n");
-      } else if (event.key === "Enter") {
-        event.preventDefault();
+    setUserInput(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (!event.shiftKey) {
         handleSubmit();
       } else {
-        setUserInput(event.target.value);
+        setUserInput(userInput + "\n");
       }
+    }
   };
-//   const handleImageChange = (event) => {
-//     setImage(event.target.files[0]);
-//   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     const response = await fetch("http://localhost:8000/api/generate-response", {
       method: "POST",
       headers: {
@@ -34,18 +31,10 @@ function Chat() {
       mode: "cors",
       body: JSON.stringify({ user_input: userInput }),
     });
-//     if (image) {
-//       const formData = new FormData();
-//       formData.append('image', image);
-
-//       const response = await fetch('http://localhost:8000/api/upload-image', {
-//         method: 'POST',
-//         body: formData,
-//       });
 
     const data = await response.json();
     const aiOutput = data.ai_output;
-    // Add AI response to the conversation history
+
     setConversations([
       ...conversations,
       { type: "user", content: userInput },
@@ -55,25 +44,51 @@ function Chat() {
     setUserInput("");
   };
 
-
   return (
-    <Box>
-      <ChatHistory conversations={conversations} />
-      <form onSubmit={handleSubmit}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        justifyContent: "flex-end",
+      }}
+    >
+      <Box
+        className="chat-history"
+        sx={{
+          flexGrow: 1,
+          overflowY: "auto",
+          p: 1,
+        }}
+      >
+        <ChatHistory conversations={conversations} />
+      </Box>
+      <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ p: 1 }}>
         <TextField
           label="Your message"
           multiline
           rows={4}
           value={userInput}
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
           fullWidth
+          variant="outlined"
+          InputProps={{
+            endAdornment: (
+              <IconButton
+                edge="end"
+                color="primary"
+                onClick={handleSubmit}
+                aria-label="send"
+                disabled={!userInput.trim()}
+              >
+                <SendIcon />
+              </IconButton>
+            ),
+          }}
         />
-        <Button type="submit" variant="contained" color="primary">
-          Send
-        </Button>
-      </form>
+      </Box>
     </Box>
   );
 }
-
 export default Chat;

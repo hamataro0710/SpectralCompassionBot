@@ -32,7 +32,7 @@ This is the frontend application for the Personalized AI Web App. It uses React 
 2. Use `npx create-react-app` to create a new React application.
 3. Install any required dependencies.
     ```
-    npm install @mui/material @emotion/react @emotion/styled
+    npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
     ```
 
 4. Edit `src/App.js` to implement the communication with the backend server.

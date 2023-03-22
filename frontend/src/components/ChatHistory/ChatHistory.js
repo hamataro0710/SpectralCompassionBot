@@ -1,5 +1,5 @@
 import React from "react";
-import "./ChatHistory.css";
+// import "./ChatHistory.css";
 import Message from "../Message/Message";
 
 const ChatHistory = ({ conversations }) => {
